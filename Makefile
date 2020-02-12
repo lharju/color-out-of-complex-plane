@@ -1,4 +1,4 @@
 .PHONY: all
 
 all:
-	gcc -Wall -Ofast -lm main.c -o mandel
+	gcc -std=c11 -Wall -Ofast -lm main.c -o coocp
