@@ -30,44 +30,55 @@ void help(void) {
 }
 
 int main(int argc, char **argv) {
-	int ite = ITE;
 
+	// Default values for image
 	Cube data;
 	data.den = 1000;
 	data.pt.x = -2;
 	data.pt.y = 2;
 	data.dia = 4;
+	
+	// Default amount of iterations
+	int ite = 200;
 
+	// Defalt speed of change for colors
 	double rs = 0.1;
 	double gs = 0;
 	double bs = 0.02;
 
+	// Bool flag if coordinates used are at the origo of image
 	bool ori = false;
-	int count = 1;
 
+	// Handling of arguments
+	int count = 1;
 	while (count < argc) {
 		if (argv[count][0] == '-' && argv[count][1] == '-') {
 			if (argv[count][2] == 'h') {
+				// Print help and exit
 				help();
 				return EXIT_SUCCESS;
 			}
 			else if (argv[count][2] == 'd') {
+				// Set size of image in pixels
 				data.den = atoi(&argv[count][4]);
 			}
 			else if (argv[count][2] == 'o') {
+				// Set origo mode to be used
 				ori = true;
 			}
 			else if (argv[count][2] == 'i') {
+				// Set amount of iterations to be done
 				ite = atoi(&argv[count][4]);
 			}
 			else if (argv[count][2] == 's') {
-				//set speed for 
+				// Set speed of change for colors
 				rs = atof(strtok(&argv[count][4], ","));
 				gs = atof(strtok(NULL, ","));
 				bs = atof(strtok(NULL, ","));
 			}
 		}
 		else {
+			// Set X and Y coordinates, on default they coordinates of topleft corner or if origo mode theyll be center coordinates of image
 			data.pt.x = strtold(strtok(argv[count], ","), NULL);
 			data.pt.y = strtold(strtok(NULL, ","), NULL);
 			data.dia = strtold(strtok(NULL, ","), NULL);
@@ -75,13 +86,15 @@ int main(int argc, char **argv) {
 		count++;
 	}
 	
+	// If origo mode in use convert coordinates to be topleft coordinates
 	if (ori) {
 		data.pt.x = data.pt.x - (data.dia/2);
 		data.pt.y = data.pt.y + (data.dia/2);
 	}	
 
-	// print delta per pixel
+	// Print delta per pixel
 	printf("delta %.3Le\n",  data.dia / data.den);
+
 
 	FILE *fp = fopen("mandel.ppm", "wb");
 	if(!fp) {
@@ -93,7 +106,6 @@ int main(int argc, char **argv) {
 	uint8_t black[3] = {0, 0, 0};
 	union colors color;
 	color.full = 0;
-	
 	int i, j, k;
 
 	for (j = 0; j < data.den; ++j) {
@@ -104,9 +116,9 @@ int main(int argc, char **argv) {
 				fwrite(black, 1, 3, fp);
 			}
 			else {
-				color.c.red = 255 * ((1+sin(k*rs))/2);			
-				color.c.green = 255 * ((1+sin(k*gs))/2);
-				color.c.blue = 255 * ((1+sin(k*bs))/2);
+				color.c.red = (rs ? 255 * ((1+sin(k*rs))/2) : 0);			
+				color.c.green = (gs ? 255 * ((1+sin(k*gs))/2) : 0);
+				color.c.blue = (bs ? 255 * ((1+sin(k*bs))/2) : 0);
 				fwrite(&(color.c.red), 1, 3, fp);
 			}	
 		}

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./coocp --d=2000 $(./random) --s=$(./random)
+feh --bg-center ./mandel.ppm

@@ -6,11 +6,6 @@
 #include <math.h>
 #include <string.h>
 
-#define abso(A) (A<0?-(A):A)
-#define ITE 500
-#define PX 1000
-#define PI 3.14159
-
 typedef struct point {
 	long double x;
 	long double y;
