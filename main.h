@@ -5,6 +5,8 @@
 #include <inttypes.h>
 #include <math.h>
 #include <string.h>
+#include <time.h>
+#include <stdbool.h>
 
 typedef struct point {
 	long double x;
@@ -17,9 +19,15 @@ typedef struct cube {
 	Point pt;
 } Cube;
 
-union colors {
-	uint32_t full;
-	struct {uint8_t red, green, blue, padding;} c;
-};
+typedef struct lang {
+	long double real;
+	long double imag;
+} com;
 
 
+void cmult(com *i, com *j) {
+	double long tmp;
+       	tmp = i->real * j->real - i->imag * j->imag;
+	i->imag = i->real * j->imag + i->imag * j->real;
+	i->real = tmp;
+}
