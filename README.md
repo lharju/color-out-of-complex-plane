@@ -2,7 +2,7 @@
 
 simple tool for vizualizing Mandelbrot set
 
-<br />
+![ALT TEXT](https://raw.githubusercontent.com/lharju/colour-out-of-complex-plane/master/example.png)
 
 > No sane wholesome colours were anywhere to be seen...
 
