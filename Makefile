@@ -1,6 +1,11 @@
-.SILENT: all
+.SILENT: cli gui
+.DEFAULT: cli
 
-all:
-	echo Making...	
-	gcc -std=c11 -g -Wall -Werror -Wextra -Wshadow -Wformat=2 -O3 -pedantic main.c -o coocp -lm
-	echo Done
+flags = -std=c11 -g -Wall -Werror -Wextra -Wshadow -O3
+files = src/*.c src/*.h Makefile
+
+cli:
+	gcc $(flags) src/*.c -o cocp -lm -lpthread
+edit:
+	vim -p $(files)
+
