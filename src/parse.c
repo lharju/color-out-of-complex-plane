@@ -27,8 +27,8 @@ error_t parse_opt(int key, char *arg, struct argp_state *state) {
 		case 'j':
 			arguments->mode = JULIA;
 			if (arg) {
-				arguments->julia = atof(strtok(arg, ","));
-				arguments->julia += I * atof(strtok(NULL, ","));
+				arguments->juliaReal = atof(strtok(arg, ","));
+				arguments->juliaImag = atof(strtok(NULL, ","));
 			}
 			break;
 		case 'o':

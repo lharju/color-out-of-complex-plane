@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 MainArgs args;
 
 extern struct argp_option options[];
@@ -28,7 +27,7 @@ int main(int argc, char **argv) {
 	pthread_t threads[args.threadCount];
 	for (n = 0; n < args.threadCount; n++) {
 		nc = n;
-		if (pthread_create(&threads[n], NULL, Thread, &nc)) {
+		if (pthread_create(&threads[n], NULL, NewThread, &nc)) {
 			error("thread not created");
 			return EXIT_FAILURE;
 		}

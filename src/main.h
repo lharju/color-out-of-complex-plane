@@ -16,6 +16,8 @@
 #include <pthread.h>
 #include <argp.h>
 
+#define LN2 		0.6931471806
+
 #define error(a)	fprintf(stderr, "ERROR:%s: %s\n", __func__, a)
 
 typedef struct arguments {
@@ -31,14 +33,16 @@ typedef struct arguments {
 	double rateRed;
 	double rateGreen;
 	double rateBlue;
-	long double complex julia;
+	long double juliaReal;
+	long double juliaImag;
 	char *name;
 	uint8_t *buffer;
 	uint8_t threadCount;	
 } MainArgs;
 
 void sleep(double);
-void *Thread(void *);
+void *OldThread(void *);
+void *NewThread(void *);
 struct arguments InitArgs(void);
 unsigned int Mandelbrot(long double complex, int); 
 unsigned int Julia(long double complex, long double complex, int);

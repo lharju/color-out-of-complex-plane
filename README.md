@@ -1,6 +1,6 @@
 # colour-out-of-complex-plane
 
-simple tool for vizualizing Mandelbrot set
+Simple tool for vizualizing Mandelbrot and Julia sets.
 
 ![ALT TEXT](https://raw.githubusercontent.com/lharju/colour-out-of-complex-plane/master/example.png)
 
